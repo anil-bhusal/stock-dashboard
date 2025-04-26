@@ -2,6 +2,7 @@ import { DataSource } from 'typeorm';
 import { stocks } from './stock.seed';
 import { Stock } from 'src/stock/entities/stock/stock';
 
+
 const AppDataSource = new DataSource({
     type: 'postgres', // or mysql/mariadb/sqlite
     host: process.env.DB_HOST,
