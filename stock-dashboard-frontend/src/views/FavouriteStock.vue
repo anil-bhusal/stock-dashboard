@@ -1,5 +1,5 @@
 <template>
-    <div :class="modeClass" class="p-6">
+    <div :class="modeClass" class="p-6 wrapper">
         <h2 class="text-2xl font-semibold mb-6">Your Favorite Stocks</h2>
         <table class="w-full text-left table-auto border-collapse">
             <thead>
@@ -16,7 +16,11 @@
             </thead>
             <tbody>
                 <tr v-for="stock in favoriteStocks" :key="stock.id" class="border-b dark:border-gray-600">
-                    <td class="px-4 py-3">{{ stock.Name }}</td>
+                    <td>
+                        <span @click="goToDetail(stock.Symbol)" class="stock-name">
+                            {{ stock.Name }}
+                        </span>
+                    </td>
                     <td class="px-4 py-3">{{ stock.Symbol }}</td>
                     <td class="px-4 py-3">{{ stock.Sector }}</td>
                     <td class="px-4 py-3">{{ stock.Industry }}</td>
@@ -39,9 +43,14 @@
 import { ref, onMounted, computed } from 'vue';
 import axiosInstance from '../utils/axios';
 import { Stock } from '../types/Stock';
+import { router } from '../router';
 
 // Store for favorite stocks
 const favoriteStocks = ref<Stock[]>([]);
+
+const goToDetail = (symbol: string) => {
+    router.push(`/stock/${symbol}`);
+};
 
 // Load favorite stocks from API
 const loadFavorites = async () => {
@@ -75,6 +84,13 @@ body {
     transition: all 0.3s ease-in-out;
 }
 
+.wrapper {
+    padding: 2rem;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 .dark {
     --bg-color: #121212;
     --text-color: #ffffff;
@@ -85,24 +101,26 @@ body {
     --text-color: #333333;
 }
 
-/* Table Styling */
 table {
     width: 100%;
     border-collapse: collapse;
 }
 
 thead {
-    background-color: var(--thead-bg);
+    background-color: var(--table-bg);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 thead th {
     text-align: left;
     padding: 12px;
-    background-color: var(--thead-bg);
+    background-color: var(--table-header-bg);
+    color: var(--text-color);
+    font-weight: bold;
 }
 
 tbody tr {
-    border-bottom: 1px solid var(--border-color);
+    background-color: var(--table-bg);
 }
 
 tbody tr:hover {
@@ -147,6 +165,26 @@ tbody td {
 
 .light tbody td a {
     color: #1976d2;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.stock-name {
+    cursor: pointer;
+    color: var(--link-color);
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.stock-name:hover {
+    color: var(--link-hover-color);
+}
+
+a {
+    color: var(--link-color);
+    text-decoration: none;
 }
 
 a:hover {

@@ -1,4 +1,3 @@
-// src/favorite/favorites.service.ts
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -16,7 +15,6 @@ export class FavoritesService {
   ) {}
 
   async markAsFavorite(stockId: number): Promise<Favorite> {
-    console.log('stockId', stockId);
     const stock = await this.stockRepository.findOne({ where: { id: stockId } });
 
     if (!stock) {
