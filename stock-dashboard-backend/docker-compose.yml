@@ -3,34 +3,43 @@ version: '3.8'
 services:
   nest-app:
     container_name: nest-stock-api
-    build: .
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules        
     ports:
       - "3000:3000"
     env_file:
-      - .env
+      - .env  # Load environment variables into container
     depends_on:
       - postgres
     restart: unless-stopped
     networks:
-      - stock-net
+      - webnet
 
   postgres:
-    container_name: postgres-stock-db
+    container_name: stock-db
     image: postgres:15
     restart: always
+    env_file:
+      - .env   # Let Postgres container also load from .env
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: stock_db  # 👈 Creates the DB
+      POSTGRES_USER: ${DB_USERNAME}      # use variable from .env
+      POSTGRES_PASSWORD: ${DB_PASSWORD}  # use variable from .env
+      POSTGRES_DB: ${DB_NAME}             # use variable from .env
+      PG_DATA: /var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - ${DB_PORT}:5432
     volumes:
       - pgdata:/var/lib/postgresql/data
     networks:
-      - stock-net
+      - webnet
 
 volumes:
   pgdata:
 
 networks:
-  stock-net:
+  webnet:
+    driver: bridge

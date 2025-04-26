@@ -130,6 +130,16 @@ The backend is built using **NestJS**, a progressive Node.js framework that prov
 
 ---
 
+7. **For docker**:
+
+   ```bash
+   npm run docker:up
+   ```
+
+   This will start the backend server at `http://localhost:3000`.
+
+---
+
 ### Testing the Setup
 
 1. **Frontend**:
