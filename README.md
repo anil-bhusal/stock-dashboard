@@ -153,36 +153,65 @@ In this project, sensitive data is encrypted before being sent from the backend 
 ### Frontend (Vue.js)
 
 ```
-frontend/
+stock-dashboard-frontend/
+├── node_modules/
 ├── public/
-│   └── index.html
 ├── src/
-│   ├── assets/
 │   ├── components/
-│   ├── views/
+│   ├── composables/
 │   ├── router/
-│   ├── store/
+│   ├── types/
+│   ├── utils/
+│   ├── views/
 │   ├── App.vue
-│   ├── main.js
-├── tailwind.config.js
-└── package.json
+│   ├── counter.ts
+│   ├── env.d.ts
+│   ├── main.ts
+│   ├── style.css
+│   ├── typescript.svg
+│   ├── vite-env.d.ts
+├── .env
+├── .gitignore
+├── index.html
+├── package-lock.json
+├── package.json
+├── tsconfig.json
+├── vite.config.ts
+
 ```
 
 ### Backend (NestJS)
 
 ```
-backend/
+stock-dashboard-backend/
+├── dist/
+├── node_modules/
 ├── src/
 │   ├── common/
-│   │   ├── filters/
-│   │   └── interceptors/
+│   ├── config/
+│   ├── favorite/
+│   ├── migrations/
 │   ├── stock/
-│   ├── favorites/
+│   ├── app.controller.spec.ts
+│   ├── app.controller.ts
 │   ├── app.module.ts
-│   └── main.ts
+│   ├── app.service.ts
+│   ├── data-source.ts
+│   ├── main.ts
+├── test/
+├── .dockerignore
 ├── .env
+├── .gitignore
+├── .prettierrc
+├── docker-compose.yml
+├── Dockerfile
+├── eslint.config.mjs
+├── nest-cli.json
+├── package-lock.json
+├── package.json
+├── README.md
+├── tsconfig.build.json
 ├── tsconfig.json
-└── package.json
 ```
 
 ---
