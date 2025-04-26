@@ -23,7 +23,9 @@
     "migrate": "npm run typeorm -- migration:run --dataSource src/config/ormconfig.ts",
     "migration:rollback": "npm run typeorm -- migration:revert --dataSource src/config/ormconfig.ts",
     "seed:run": "ts-node src/seeds/seed.ts",
-    "seed:drop": "ts-node src/seeds/drop.ts"
+    "seed:drop": "ts-node src/seeds/drop.ts",
+    "docker:up": "docker-compose up --build",
+    "docker:down": "docker-compose down"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
