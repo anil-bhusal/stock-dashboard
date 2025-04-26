@@ -1,0 +1,91 @@
+/* src/assets/styles/main.css */
+
+/* Default light theme */
+/* src/assets/styles/main.css */
+
+/* Default light theme */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #111111;
+  --btn-bg: #e0e0e0;
+  --table-bg: #ffffff;
+  --table-header-bg: #f4f4f4;
+  --table-row-bg: #fafafa;
+  --table-border: #ddd;
+  --table-row-hover-bg: #f0f0f0;
+  --link-color: #0066cc;
+  --link-hover-color: #004a99;
+}
+
+/* Dark theme styles */
+[data-theme='dark'] {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --btn-bg: #333333;
+  --table-bg: #333333;
+  --table-header-bg: #444444;
+  --table-row-bg: #555555;
+  --table-border: #444444;
+  --table-row-hover-bg: #666666;
+  --link-color: #56b6c2;
+  --link-hover-color: #3f9fa6;
+}
+
+
+/* Apply global background and text colors */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+a {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--table-bg);
+}
+
+th, td {
+  padding: 0.75rem;
+  text-align: left;
+  border: 1px solid var(--table-border);
+}
+
+th {
+  background-color: #444444;
+  color: var(--text-color);
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background-color: #555555;
+}
+
+tr:hover {
+  background-color: #666666;
+}
+
+/* Buttons */
+button {
+  background-color: var(--btn-bg);
+  color: var(--text-color);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #555555;
+}

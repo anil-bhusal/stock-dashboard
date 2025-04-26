@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  nest-app:
+    container_name: nest-stock-api
+    build: .
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+    restart: unless-stopped
+    networks:
+      - stock-net
+
+  postgres:
+    container_name: postgres-stock-db
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: stock_db  # 👈 Creates the DB
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - stock-net
+
+volumes:
+  pgdata:
+
+networks:
+  stock-net:
