@@ -22,8 +22,8 @@
     "orm-create": "npm run typeorm -- migration:create",
     "migrate": "npm run typeorm -- migration:run --dataSource src/config/ormconfig.ts",
     "migration:rollback": "npm run typeorm -- migration:revert --dataSource src/config/ormconfig.ts",
-    "seed:run": "ts-node src/seeds/seed.ts",
-    "seed:drop": "ts-node src/seeds/drop.ts",
+    "seed:run": "ts-node -r tsconfig-paths/register src/seed/seed.ts",
+    "seed:drop": "ts-node -r tsconfig-paths/register src/seed/drop.ts",
     "docker:up": "docker-compose up --build",
     "docker:down": "docker-compose down"
   },
