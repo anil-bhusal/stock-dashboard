@@ -23,19 +23,36 @@ export class StockService {
 
 
     async getAllLiveStocks(): Promise<Stock[]> {
-        const stocks = await this.stockRepository
+        // const stocks = await this.stockRepository
+        //     .createQueryBuilder("stock")
+        //     .leftJoinAndSelect("stock.favorites", "favorite")
+        //     .getMany();
+
+        // // Sort to move favorites to the top
+        // stocks.sort((a, b) => {
+        //     const aFav = a.favorites?.some(f => f.isFavorite) ? 1 : 0;
+        //     const bFav = b.favorites?.some(f => f.isFavorite) ? 1 : 0;
+        //     return bFav - aFav; // Descending order: true (1) comes before false (0)
+        // });
+
+        // return stocks;
+
+        return await this.stockRepository
             .createQueryBuilder("stock")
             .leftJoinAndSelect("stock.favorites", "favorite")
+            .addSelect(`
+                    CASE 
+                        WHEN EXISTS (
+                            SELECT 1 
+                            FROM "favorite" f 
+                            WHERE f."stockId" = stock.id AND f."isFavorite" = true
+                        ) THEN 1 
+                        ELSE 0 
+                    END
+                `, "is_fav")
+            .orderBy("is_fav", "DESC")
+            .addOrderBy("stock.id", "ASC")
             .getMany();
-    
-        // Sort to move favorites to the top
-        stocks.sort((a, b) => {
-            const aFav = a.favorites?.some(f => f.isFavorite) ? 1 : 0;
-            const bFav = b.favorites?.some(f => f.isFavorite) ? 1 : 0;
-            return bFav - aFav; // Descending order: true (1) comes before false (0)
-        });
-    
-        return stocks;
     }
 
     async findBySymbol(symbol: string): Promise<Stock | null> {
