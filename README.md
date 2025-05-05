@@ -117,7 +117,7 @@ The backend is built using **NestJS**, a progressive Node.js framework that prov
    Populate the database with initial data:
 
    ```bash
-   npm run seed
+   npm run seed:run
    ```
 
 6. **Run the NestJS backend server**:
